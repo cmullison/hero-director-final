@@ -354,17 +354,6 @@ const NewProviders = () => {
           />
         </motion.div>
 
-        {/* Provider capability scanner */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(16, 185, 129, 0.1) 45deg, transparent 90deg, rgba(139, 92, 246, 0.1) 135deg, transparent 180deg, rgba(6, 182, 212, 0.1) 225deg, transparent 270deg, rgba(236, 72, 153, 0.1) 315deg, transparent 360deg)",
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
-
         {/* Model performance grid overlay */}
         <motion.div
           className="absolute top-0 left-0 w-full h-full"

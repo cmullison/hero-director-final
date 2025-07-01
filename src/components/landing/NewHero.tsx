@@ -22,7 +22,7 @@ const NewHero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 pt-32 sm:px-6 sm:pt-28 pb-20 overflow-hidden shadow-xl shadow-purple-500/25">
       {/* Enhanced Multi-layered Background System */}
-      <div className="absolute inset-0">
+      <div className="absolute top-0 bottom-0 left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] w-[100vw]">
         {/* Base gradient foundation */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-purple-50/20 to-pink-50/20" />
 
@@ -96,29 +96,29 @@ const NewHero = () => {
         {/* Circuit board pattern overlay */}
         <motion.div
           className="absolute inset-0 opacity-10"
-          initial={{ opacity: 0.1 }}
-          animate={{ opacity: 0.2 }}
+          initial={{ opacity: 0.05 }}
+          animate={{ opacity: 0.1 }}
           transition={{ duration: 4, delay: 2 }}
         >
-          <svg className="w-full h-full" viewBox="0 0 400 400">
+          <svg className="w-full h-full">
             <defs>
               <pattern
                 id="circuit"
-                width="20"
-                height="20"
+                width="50"
+                height="50"
                 patternUnits="userSpaceOnUse"
               >
-                <g stroke="#8B5CF6" strokeWidth="0.25" fill="none">
-                  <circle cx="20" cy="20" r="0.1" fill="#8B5CF6" />
-                  <path d="M20,0 L20,20 M0,20 L20,20 M20,20 L40,20 M20,20 L20,40" />
-                  <circle cx="0" cy="20" r="0.05" fill="#EC4899" />
-                  <circle cx="40" cy="20" r="0.05" fill="#EC4899" />
-                  <circle cx="20" cy="0" r="0.05" fill="#3B82F6" />
-                  <circle cx="20" cy="40" r="0.05" fill="#3B82F6" />
+                <g stroke="#8B5CF6" strokeWidth="0.5" fill="none">
+                  <circle cx="25" cy="25" r="0.5" fill="#8B5CF6" />
+                  <path d="M25,0 L25,25 M0,25 L25,25 M25,25 L50,25 M25,25 L25,50" />
+                  <circle cx="0" cy="25" r="0.3" fill="#EC4899" />
+                  <circle cx="50" cy="25" r="0.3" fill="#EC4899" />
+                  <circle cx="25" cy="0" r="0.3" fill="#3B82F6" />
+                  <circle cx="25" cy="50" r="0.3" fill="#3B82F6" />
                 </g>
               </pattern>
             </defs>
-            <rect width="400" height="400" fill="url(#circuit)" />
+            <rect width="100%" height="100%" fill="url(#circuit)" />
           </svg>
         </motion.div>
 

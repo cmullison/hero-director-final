@@ -250,7 +250,7 @@ const NewFeatures = () => {
           style={{
             transform: "perspective(1000px) rotateX(45deg) translateZ(-200px)",
           }}
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0.1 }}
           animate={{ opacity: 0.2 }}
           transition={{ duration: 3, delay: 1 }}
         >
@@ -269,54 +269,51 @@ const NewFeatures = () => {
         {/* Circuit board pattern overlay */}
         <motion.div
           className="absolute inset-0 opacity-10"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0.05 }}
           animate={{ opacity: 0.1 }}
           transition={{ duration: 4, delay: 2 }}
         >
-          <svg className="w-full h-full" viewBox="0 0 400 400">
+          <svg className="w-full h-full">
             <defs>
               <pattern
-                id="circuit"
-                width="20"
-                height="20"
+                id="circuit-features"
+                width="50"
+                height="50"
                 patternUnits="userSpaceOnUse"
               >
-                <g stroke="#8B5CF6" strokeWidth="0.25" fill="none">
-                  <circle cx="20" cy="20" r="0.1" fill="#8B5CF6" />
-                  <path d="M20,0 L20,20 M0,20 L20,20 M20,20 L40,20 M20,20 L20,40" />
-                  <circle cx="0" cy="20" r="0.05" fill="#EC4899" />
-                  <circle cx="40" cy="20" r="0.05" fill="#EC4899" />
-                  <circle cx="20" cy="0" r="0.05" fill="#3B82F6" />
-                  <circle cx="20" cy="40" r="0.05" fill="#3B82F6" />
+                <g stroke="#8B5CF6" strokeWidth="0.5" fill="none">
+                  <circle cx="25" cy="25" r="0.5" fill="#8B5CF6" />
+                  <path d="M25,0 L25,25 M0,25 L25,25 M25,25 L50,25 M25,25 L25,50" />
+                  <circle cx="0" cy="25" r="0.3" fill="#EC4899" />
+                  <circle cx="50" cy="25" r="0.3" fill="#EC4899" />
+                  <circle cx="25" cy="0" r="0.3" fill="#3B82F6" />
+                  <circle cx="25" cy="50" r="0.3" fill="#3B82F6" />
                 </g>
               </pattern>
             </defs>
-            <rect width="400" height="400" fill="url(#circuit)" />
+            <rect width="100%" height="100%" fill="url(#circuit-features)" />
           </svg>
         </motion.div>
-
         {/* Data stream network */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
-          {/* <defs>
+          <defs>
             <linearGradient id="dataStream1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0" />
-              <stop offset="30%" stopColor="#8B5CF6" stopOpacity="0.8" />
-              <stop offset="70%" stopColor="#EC4899" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0" />
+              <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#EC4899" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1" />
             </linearGradient>
             <linearGradient
               id="dataStream2"
               x1="0%"
-              y1="100%"
+              y1="0%"
               x2="100%"
-              y2="0%"
+              y2="100%"
             >
-              <stop offset="0%" stopColor="#10B981" stopOpacity="0" />
-              <stop offset="50%" stopColor="#06B6D4" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#EC4899" stopOpacity="0.1" />
             </linearGradient>
-          </defs> */}
-
+          </defs>
           {/* Horizontal data streams */}
           <motion.path
             d="M -50,100 Q 150,95 350,105 T 750,100"
@@ -464,50 +461,6 @@ const NewFeatures = () => {
             boxShadow: "0 0 70px rgba(16, 185, 129, 0.3)",
           }}
         />
-
-        {/* Animated matrix-like pattern */}
-        <motion.div
-          className="absolute inset-0 opacity-5"
-          initial={{ opacity: 0.6 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ duration: 4, delay: 2 }}
-        >
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundImage: `
-                repeating-linear-gradient(
-                  0deg,
-                  transparent,
-                  transparent 2px,
-                  rgba(59, 130, 246, 0.1) 4px,
-                  rgba(59, 130, 246, 0.1) 4px
-                ),
-                repeating-linear-gradient(
-                  90deg,
-                  transparent,
-                  transparent 2px,
-                  rgba(139, 92, 246, 0.1) 4px,
-                  rgba(139, 92, 246, 0.1) 4px
-                )
-              `,
-            }}
-          />
-        </motion.div>
-
-        {/* Pulse scan effect */}
-        {/* <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle at center, transparent 40%, rgba(59, 130, 246, 0.1) 50%, transparent 60%)",
-          }}
-          animate={{
-            scale: [1, 2, 1],
-            opacity: [0, 0.3, 0],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        /> */}
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
