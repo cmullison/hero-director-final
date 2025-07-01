@@ -33,48 +33,60 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: mode !== "production",
+    // Increase chunk size warning limit
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Bundle React and related packages
-          if (
-            id.includes("node_modules/react/") ||
-            id.includes("node_modules/react-dom/") ||
-            id.includes("node_modules/react-router-dom/")
-          ) {
-            return "react-vendor";
+        manualChunks: {
+          // Ensure React is in its own chunk and loads first
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          // UI components that depend on React
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', 'lucide-react'],
+          // Charts
+          'charts': ['recharts'],
+          // Utilities
+          'lodash': ['lodash'],
+        },
+        // Ensure proper chunk loading order
+        entryFileNames: 'js/[name]-[hash].js',
+        chunkFileNames: 'js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name!.split('.');
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
+            return `images/[name]-[hash][extname]`;
           }
-
-          // Bundle UI-related packages
-          if (
-            id.includes("node_modules/@radix-ui/") ||
-            id.includes("node_modules/lucide-react/") ||
-            id.includes("node_modules/next-themes/")
-          ) {
-            return "ui-vendor";
+          if (/woff2?|eot|ttf|otf/i.test(ext)) {
+            return `fonts/[name]-[hash][extname]`;
           }
-
-          // Bundle data management packages
-          if (id.includes("node_modules/@tanstack/")) {
-            return "data-vendor";
-          }
-
-          // Bundle our UI components
-          if (id.includes("/src/components/ui/")) {
-            return "app-ui";
-          }
-
-          // Bundle our model-related code
-          if (id.includes("/src/pages/dashboard/models/")) {
-            return "models";
-          }
+          return `assets/[name]-[hash][extname]`;
         },
       },
+      // Enable tree shaking
+      treeshake: {
+        moduleSideEffects: false,
+      },
     },
+    // Enable minification optimizations
+    minify: mode === 'production' ? 'terser' : false,
+    terserOptions: mode === 'production' ? {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    } : undefined,
   },
   assetsInclude: ["**/*.woff2"],
   // Handle service worker in development
   worker: {
     format: "es",
+  },
+  // Enable dependency optimization
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+    ],
   },
 }));

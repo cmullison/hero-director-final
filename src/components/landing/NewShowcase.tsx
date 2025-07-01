@@ -36,8 +36,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import CodeEditorComponent from "@uiw/react-textarea-code-editor";
-import { useTheme } from "next-themes";
 import { GlowEffect } from "../glow-effect";
 import { InteractiveHoverButton } from "./interactive-hover-button";
 
@@ -46,7 +44,6 @@ const NewShowcase = () => {
   const [selectedModel, setSelectedModel] = useState("gpt-4-turbo-preview");
   const [typingText, setTypingText] = useState("");
   const [showProgress, setShowProgress] = useState(false);
-  const { theme } = useTheme();
 
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
@@ -1151,22 +1148,15 @@ const mediaGeneration = {
                   transition={{ duration: 1, delay: 0.5 }}
                   className="h-full"
                 >
-                  <CodeEditorComponent
-                    value={examples[activeTab].code}
-                    language="js"
-                    readOnly
-                    padding={15}
+                  <pre
+                    className="text-sm font-mono text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 p-4 rounded-b-3xl overflow-auto h-96"
                     style={{
-                      fontSize: 13,
-                      backgroundColor: theme === "dark" ? "#282c34" : "#fafafa",
                       fontFamily:
                         'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-                      height: "100%",
-                      overflow: "auto",
-                      borderRadius: "0 0 1.5rem 1.5rem",
                     }}
-                    data-color-mode={theme === "dark" ? "dark" : "light"}
-                  />
+                  >
+                    <code>{examples[activeTab].code}</code>
+                  </pre>
                 </motion.div>
 
                 {/* Code execution indicator */}

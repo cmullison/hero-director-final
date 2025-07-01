@@ -5,7 +5,6 @@ import type { KeyboardEvent } from "react";
 import { toast } from "sonner";
 import { Loader2, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import CodeEditorComponent from "@uiw/react-textarea-code-editor";
 import { useTheme } from "next-themes";
 
 // Define the ref interface for parent component access
@@ -45,23 +44,6 @@ export const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
     const [edited, setEdited] = useState(false);
     const [loading, setLoading] = useState(false);
     const { theme } = useTheme();
-
-    // Theme colors matching highlight.js atom-one themes
-    const themeColors = {
-      dark: {
-        background: "#282c34",
-        color: "#abb2bf",
-        borderColor: "#3e4451",
-      },
-      light: {
-        background: "#fafafa",
-        color: "#383a42",
-        borderColor: "#e5e5e6",
-      },
-    };
-
-    const currentTheme =
-      theme === "dark" ? themeColors.dark : themeColors.light;
 
     // Load selected file's code when it changes
     useEffect(() => {
@@ -158,8 +140,8 @@ export const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
     }, [selectedFile, selectedGitHubFile, isGitHubMode, selectedRepo]);
 
     // Handle code changes
-    const handleCodeChange = (value: string) => {
-      setCode(value);
+    const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setCode(e.target.value);
       setEdited(true);
     };
 
@@ -169,6 +151,22 @@ export const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
       if (e.key === "s" && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         handleSave();
+      }
+
+      // Handle tab insertion
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const textarea = e.target as HTMLTextAreaElement;
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const newValue = code.substring(0, start) + "  " + code.substring(end);
+        setCode(newValue);
+        setEdited(true);
+
+        // Set cursor position after the inserted tab
+        setTimeout(() => {
+          textarea.selectionStart = textarea.selectionEnd = start + 2;
+        }, 0);
       }
     };
 
@@ -224,30 +222,25 @@ export const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
           )}
 
           <div className="h-full">
-            <CodeEditorComponent
+            <textarea
               value={code}
-              language="js"
-              placeholder="Start typing your code..."
-              onChange={(evn: any) => handleCodeChange(evn.target.value)}
+              onChange={handleCodeChange}
               onKeyDown={handleKeyDown}
-              padding={15}
+              placeholder="Start typing your code..."
+              className="w-full h-full resize-none border-0 outline-none p-4 bg-background text-foreground font-mono text-sm leading-relaxed"
               style={{
-                fontSize: 14,
-                backgroundColor: currentTheme.background,
-                color: currentTheme.color,
                 fontFamily:
                   'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-                height: "100%",
-                overflow: "auto",
-                borderColor: currentTheme.borderColor,
+                lineHeight: "1.5",
+                tabSize: 2,
               }}
-              data-color-mode={theme === "dark" ? "dark" : "light"}
+              spellCheck={false}
             />
           </div>
 
           {/* Footer Info */}
           <div className="absolute bottom-4 right-4 text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded">
-            Lines: {lineCount} | Ctrl+S to save
+            Lines: {lineCount} | Ctrl+S to save {edited && "| ●"}
           </div>
         </div>
       </div>
