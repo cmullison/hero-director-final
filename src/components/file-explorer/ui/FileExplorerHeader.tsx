@@ -1,7 +1,6 @@
 import { ChevronRight, Github, FolderOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CreateFileDialog } from "../dialogs/CreateFileDialog";
-import { useGitHub } from "@/providers/GitHubProvider";
 import { Toggle } from "@/components/ui/toggle";
 
 type FileItem = {
@@ -34,26 +33,13 @@ export function FileExplorerHeader({
   onNavigateBack,
   onFileCreated,
 }: FileExplorerHeaderProps) {
-  const { isGitHubMode, setIsGitHubMode, selectedRepo } = useGitHub();
-
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <h3 className="text-sm font-medium">Files</h3>
-        {selectedRepo && (
-          <Toggle
-            pressed={isGitHubMode}
-            onPressedChange={setIsGitHubMode}
-            size="sm"
-            className="h-7"
-          >
-            <Github className="h-3 w-3 mr-1" />
-            {selectedRepo.name}
-          </Toggle>
-        )}
       </div>
       <div className="flex items-center gap-1">
-        {currentFolder && !isGitHubMode && (
+        {currentFolder && (
           <Button
             variant="ghost"
             size="icon"
@@ -63,14 +49,14 @@ export function FileExplorerHeader({
             <ChevronRight className="h-4 w-4 rotate-180" />
           </Button>
         )}
-        {!isGitHubMode && (
+        {
           <CreateFileDialog
             projectId={projectId}
             currentFolder={currentFolder}
             availableFolders={availableFolders}
             onFileCreated={onFileCreated}
           />
-        )}
+        }
       </div>
     </div>
   );

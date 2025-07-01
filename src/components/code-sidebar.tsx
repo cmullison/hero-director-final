@@ -5,14 +5,12 @@ import {
   ChevronRight,
   File,
   Folder,
-  Plus,
   MoreHorizontal,
   Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
 import { useProject } from "@/providers/ProjectProvider";
-import { useGitHub } from "@/providers/GitHubProvider";
 
 import {
   Collapsible,

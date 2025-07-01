@@ -65,7 +65,7 @@ export const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:8788",
   "https://mulls.io",
-  "https://agents.mulls.io",
+  "https://hd.mulls.io",
   "https://blob.mulls.io",
 ];
 
@@ -1067,8 +1067,6 @@ app.use('/api/files/*', authMiddleware);
 app.route('/api/files', filesRouter);
 app.use('/api/project/*', authMiddleware);
 app.route('/api/project', projectRouter);
-app.use('/api/github/*', authMiddleware);
-app.route('/api/github', githubRouter);
 app.use('/api/chat/*', authMiddleware);
 app.route('/api/chat', chatAPI);
 

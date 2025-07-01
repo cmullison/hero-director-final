@@ -1,9 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Brain,
   Zap,
@@ -14,7 +11,6 @@ import {
   ExternalLink,
   Cpu,
 } from "lucide-react";
-import ProviderAnalytics from "../models/model-analytics";
 
 export default function DashboardModels() {
   return (
@@ -139,11 +135,6 @@ export default function DashboardModels() {
             </Card>
           </div>
         </div>
-      </div>
-
-      {/* Main Content Area */}
-      <div className="p-6 space-y-6">
-        <ProviderAnalytics />
       </div>
     </div>
   );

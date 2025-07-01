@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Folder,
-  MoreHorizontal,
-  Share,
-  Trash2,
-  type LucideIcon,
-} from "lucide-react";
+import { History, MoreHorizontal, Plus, type LucideIcon } from "lucide-react";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
@@ -28,10 +22,10 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-export function NavProjects({
-  projects,
+export function NavSandbox({
+  sandbox,
 }: {
-  projects: {
+  sandbox: {
     name: string;
     url: string;
     icon: React.FC<React.SVGProps<SVGSVGElement>> | LucideIcon;
@@ -42,9 +36,9 @@ export function NavProjects({
   return (
     <SidebarGroup>
       <SidebarSeparator className="mx-auto mb-4 group-data-[state=expanded]:hidden" />
-      <SidebarGroupLabel>My Projects</SidebarGroupLabel>
+      <SidebarGroupLabel>Creation Sandbox</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => (
+        {sandbox.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               <Link to={item.url}>
@@ -65,17 +59,12 @@ export function NavProjects({
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
-                  <Folder className="text-muted-foreground" />
-                  <span>View Project</span>
+                  <Plus className="text-muted-foreground" />
+                  <span>Quick Create</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Share className="text-muted-foreground" />
-                  <span>Share Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Trash2 className="text-muted-foreground" />
-                  <span>Delete Project</span>
+                  <History className="text-muted-foreground" />
+                  <span>View Recent</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -9,8 +9,6 @@ import {
   Brain,
   Calendar,
   ChartLine,
-  Code,
-  Server,
   Settings2,
   Video,
   LayoutDashboard,
@@ -18,10 +16,9 @@ import {
   Image,
   Wrench,
   HardDriveIcon,
-  ChartBar,
-  Github,
   MessageSquare,
-  GitPullRequest,
+  Mic,
+  Speaker,
 } from "lucide-react";
 
 import { NavUser } from "@/components/dash-ui/nav-user";
@@ -41,6 +38,7 @@ import { NavSecondary } from "./nav-secondary";
 import { TeamSwitcher } from "./team-switcher";
 import { AgentIcon } from "../agent-icon";
 import { Robot } from "@phosphor-icons/react";
+import { NavSandbox } from "./nav-sandbox";
 
 // This is sample data from main branch
 export const data = {
@@ -58,46 +56,11 @@ export const data = {
       icon: LayoutDashboard,
       items: [],
     },
-    {
-      title: "Chat",
-      url: "/dashboard/chat",
-      icon: MessageSquare,
-      items: [],
-    },
-    {
-      title: "Agents",
-      url: "/dashboard/agents",
-      icon: AgentIcon,
-      items: [
-        /*         {
-          title: "Claude",
-          url: "#",
-        },
-        {
-          title: "OpenAI",
-          url: "#",
-        }, */
-        {
-          title: "Conversations",
-          url: "/dashboard/agents/conversations",
-        },
-      ],
-    },
-    {
-      title: "Code Assistant",
-      url: "/dashboard/editor",
-      icon: Code,
-      items: [],
-    },
-    {
+    /* {
       title: "AI Sandbox",
       url: "#",
       icon: Wrench,
       items: [
-        /*         {
-          title: "Chat",
-          url: "#",
-        }, */
         {
           title: "Flux-Schnell",
           url: "/dashboard/sandbox/flux-schnell",
@@ -110,123 +73,25 @@ export const data = {
           title: "Video Generation",
           url: "/dashboard/sandbox/video-generation",
         },
-        /*         {
-          title: "Multi-modal",
-          url: "#",
-        }, */
       ],
-    },
+    }, */
     {
-      title: "MCP Client (beta)",
-      url: "/dashboard/mcp-client",
-      icon: Server,
-      items: [],
-    },
-    {
-      title: "GitHub Integration",
-      url: "/dashboard/github",
-      icon: Github,
-      items: [],
-    },
-    {
-      title: "Issues",
-      url: "/dashboard/issues",
-      icon: GitPullRequest,
-      items: [],
-    },
-    {
-      title: "Anthropic",
-      url: "/dashboard/anthropic",
-      icon: Brain,
-      items: [],
-    },
-    {
-      title: "R2 Storage",
+      title: "My Files",
       url: "/dashboard/r2-storage",
       icon: HardDriveIcon,
       items: [],
     },
     {
-      title: "Lit",
-      url: "/dashboard/analytics",
-      icon: ChartBar,
-      items: [],
-    },
-    {
-      title: "Content Creation",
+      title: "My Content",
       url: "/dashboard/content-creation",
       icon: BookOpen,
       items: [],
     },
     {
-      title: "Models & Providers",
-      url: "/dashboard/models",
-      icon: Bot,
-      items: [
-        /*         {
-          title: "OpenAI",
-          url: "#",
-        },
-        {
-          title: "Claude",
-          url: "#",
-        },
-        {
-          title: "Google",
-          url: "#",
-        },
-        {
-          title: "Replicate",
-          url: "#",
-        },
-        {
-          title: "AI Gateway",
-          url: "#",
-        },
-        {
-          title: "Performance",
-          url: "#",
-        }, */
-      ],
-    },
-    /*     {
-      title: "Prompts",
-      url: "#",
-      icon: FileText,
-      items: [],
-    }, */
-    {
-      title: "Prompts",
+      title: "My Prompts",
       url: "/dashboard/prompts",
       icon: FileText,
       items: [],
-    },
-    {
-      title: "Assets",
-      url: "#",
-      icon: Image,
-      items: [
-        /*         {
-          title: "Images",
-          url: "#",
-        },
-        {
-          title: "Videos",
-          url: "#",
-        },
-        {
-          title: "Documents",
-          url: "#",
-        },
-        {
-          title: "Library",
-          url: "#",
-        }, */
-        {
-          title: "Templates",
-          url: "/dashboard/content-creation",
-        },
-      ],
     },
   ],
   navSecondary: [
@@ -244,18 +109,30 @@ export const data = {
   projects: [
     {
       name: "Coordier",
-      url: "/dashboard/project",
+      url: "/dashboard/issues",
       icon: Calendar,
     },
+  ],
+  sandbox: [
     {
-      name: "Morning Reports",
-      url: "/dashboard/project",
-      icon: ChartLine,
+      name: "Image Generation",
+      url: "/dashboard/sandbox/image-generation",
+      icon: Image,
     },
     {
-      name: "Hero Director",
-      url: "/dashboard/project",
+      name: "Video Generation",
+      url: "/dashboard/sandbox/video-generation",
       icon: Video,
+    },
+    {
+      name: "Voice Generation",
+      url: "/dashboard/sandbox/voice-generation",
+      icon: Mic,
+    },
+    {
+      name: "Sound Generation",
+      url: "/dashboard/sandbox/sound-generation",
+      icon: Speaker,
     },
   ],
 };
@@ -269,6 +146,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           item.url === location.pathname ||
           (item.url !== "/dashboard" &&
             location.pathname.startsWith(item.url)) ||
+          // @ts-ignore
           item.items?.some((subItem) => location.pathname === subItem.url)
       ) || data.navMain[0]
     );
@@ -280,6 +158,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       (item) =>
         item.url === location.pathname ||
         (item.url !== "/dashboard" && location.pathname.startsWith(item.url)) ||
+        // @ts-ignore
         item.items?.some((subItem) => location.pathname === subItem.url)
     );
     if (newActiveItem && newActiveItem !== activeItem) {
@@ -300,8 +179,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
+        <NavSandbox sandbox={data.sandbox} />
         <NavProjects projects={data.projects} />
-        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

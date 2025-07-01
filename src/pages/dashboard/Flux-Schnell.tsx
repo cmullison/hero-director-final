@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useRef } from "react";
-import ProviderAnalytics from "../models/model-analytics";
 import { ImageGenerator } from "../sandbox/image-generator";
 import { ImageEditor } from "../sandbox/image-editor";
 import Tabs from "@/components/ui/tabs";

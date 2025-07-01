@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Loader2, ChevronRight, FolderOpen, FileText } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
-import { useGitHub } from "@/providers/GitHubProvider";
 import { toast } from "sonner";
 import { FileExplorerHeader } from "./file-explorer/ui/FileExplorerHeader";
 import { FileTree } from "./file-explorer/ui/FileTree";
@@ -56,7 +55,6 @@ interface FileExplorerProps {
 
 export function FileExplorer({ onFileSelect, projectId }: FileExplorerProps) {
   const { user, isAuthenticated, loading: authLoading } = useSession();
-  const { selectedRepo, selectedBranch, isGitHubMode } = useGitHub();
   const [files, setFiles] = useState<FileItem[]>([]);
   const [githubFiles, setGithubFiles] = useState<GitHubFileItem[]>([]);
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(
@@ -85,15 +83,12 @@ export function FileExplorer({ onFileSelect, projectId }: FileExplorerProps) {
 
   // Fetch GitHub files when in GitHub mode
   useEffect(() => {
-    if (!isGitHubMode || !selectedRepo) return;
-
     const fetchGitHubFiles = async () => {
       try {
         setLoading(true);
-        const [owner, repoName] = selectedRepo.full_name.split("/");
 
         const response = await fetch(
-          `/api/github/repositories/${owner}/${repoName}/tree/${currentGitHubPath}`,
+          `/api/github/repositories/hero-director/tree/${currentGitHubPath}`,
           {
             credentials: "include",
           }
@@ -116,7 +111,7 @@ export function FileExplorer({ onFileSelect, projectId }: FileExplorerProps) {
     };
 
     fetchGitHubFiles();
-  }, [isGitHubMode, selectedRepo, currentGitHubPath]);
+  }, [currentGitHubPath]);
 
   // Fetch files based on current folder and project
   useEffect(() => {
@@ -376,7 +371,7 @@ export function FileExplorer({ onFileSelect, projectId }: FileExplorerProps) {
   };
 
   // Empty state when not loading and no files
-  if (!loading && files.length === 0 && !authLoading && !isGitHubMode) {
+  if (!loading && files.length === 0 && !authLoading) {
     return (
       <div className="space-y-2">
         <FileExplorerHeader
@@ -488,8 +483,6 @@ export function FileExplorer({ onFileSelect, projectId }: FileExplorerProps) {
         <div className="flex justify-center py-4">
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
         </div>
-      ) : isGitHubMode ? (
-        renderGitHubFiles()
       ) : (
         <FileTree
           files={files}

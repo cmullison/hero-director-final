@@ -14,27 +14,11 @@ const Signup = lazy(() => import("./pages/Signup"));
 
 // Dashboard pages
 const DashboardMain = lazy(() => import("./pages/dashboard/Dashboard"));
-const DashboardAnalytics = lazy(() => import("./pages/dashboard/Analytics"));
 const DashboardUsage = lazy(() => import("./pages/dashboard/Usage"));
 const DashboardPrompts = lazy(() => import("./pages/dashboard/Prompts"));
-const DashboardAssets = lazy(() => import("./pages/dashboard/Assets"));
-const DashboardManageProjects = lazy(
-  () => import("./pages/dashboard/Manage-Projects")
-);
-const DashboardModels = lazy(() => import("./pages/dashboard/Models"));
 const DashboardProject = lazy(() => import("./pages/dashboard/Project"));
 const DashboardSandbox = lazy(() => import("./pages/dashboard/Sandbox"));
 const Dashboard = lazy(() => import("./pages/dashboard/Index"));
-const DashboardContentCreation = lazy(
-  () => import("./pages/dashboard/Content-Creation")
-);
-const DashboardEditor = lazy(() => import("./pages/dashboard/Editor"));
-const DashboardAnthropic = lazy(
-  () => import("./pages/dashboard/AnthropicPatterns")
-);
-const R2Storage = lazy(() => import("./pages/dashboard/R2Storage"));
-const DashboardLit = lazy(() => import("./pages/dashboard/Lit"));
-const McpClient = lazy(() => import("./pages/dashboard/McpClient"));
 const DashboardChat = lazy(() => import("./pages/dashboard/Chat"));
 // Agents
 const AgentsConversations = lazy(
@@ -53,8 +37,6 @@ const Settings = lazy(() => import("./pages/dashboard/Settings"));
 const Support = lazy(() => import("./pages/dashboard/Support"));
 const Feedback = lazy(() => import("./pages/dashboard/Feedback"));
 const UserProfile = lazy(() => import("./pages/user/user-profile"));
-const GitHubIntegration = lazy(() => import("./pages/GitHubIntegration"));
-const GitHubOAuthCallback = lazy(() => import("./pages/GitHubOAuthCallback"));
 const Issues = lazy(() => import("./pages/dashboard/Issues"));
 
 const queryClient = new QueryClient();
@@ -147,82 +129,10 @@ const App = () => (
               }
             />
             <Route
-              path="content-creation"
-              element={
-                <SuspenseWrapper>
-                  <DashboardContentCreation />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="analytics"
-              element={
-                <SuspenseWrapper>
-                  <DashboardLit />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="anthropic"
-              element={
-                <SuspenseWrapper>
-                  <DashboardAnthropic />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="assets"
-              element={
-                <SuspenseWrapper>
-                  <DashboardAssets />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="manage-projects"
-              element={
-                <SuspenseWrapper>
-                  <DashboardManageProjects />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="models"
-              element={
-                <SuspenseWrapper>
-                  <DashboardModels />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
               path="project"
               element={
                 <SuspenseWrapper>
                   <DashboardProject />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="r2-storage"
-              element={
-                <SuspenseWrapper>
-                  <R2Storage />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="mcp-client"
-              element={
-                <SuspenseWrapper>
-                  <McpClient />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="github"
-              element={
-                <SuspenseWrapper>
-                  <GitHubIntegration />
                 </SuspenseWrapper>
               }
             />
@@ -235,26 +145,10 @@ const App = () => (
               }
             />
             <Route
-              path="github/callback"
-              element={
-                <SuspenseWrapper>
-                  <GitHubOAuthCallback />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
               path="sandbox"
               element={
                 <SuspenseWrapper>
                   <DashboardSandbox />
-                </SuspenseWrapper>
-              }
-            />
-            <Route
-              path="editor"
-              element={
-                <SuspenseWrapper>
-                  <DashboardEditor />
                 </SuspenseWrapper>
               }
             />

@@ -16,7 +16,6 @@ import { CodeSidebar } from "@/components/code-sidebar";
 import CodeCrumbs from "./code-crumbs";
 import { ProjectProvider } from "@/providers/ProjectProvider";
 import { TeamProvider, useTeam } from "@/providers/TeamProvider";
-import { GitHubProvider } from "@/providers/GitHubProvider";
 import CreateProjectDialog from "@/components/project/CreateProjectDialog";
 import CreateTeamDialog from "@/components/dash-ui/CreateTeamDialog";
 import "../../index.css";
@@ -92,9 +91,7 @@ export default function Dashboard() {
     <div className="flex h-screen w-full overflow-hidden">
       <TeamProvider>
         <ProjectProvider>
-          <GitHubProvider>
-            <DashboardContent />
-          </GitHubProvider>
+          <DashboardContent />
         </ProjectProvider>
       </TeamProvider>
     </div>

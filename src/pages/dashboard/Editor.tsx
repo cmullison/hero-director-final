@@ -7,13 +7,11 @@ import {
 } from "@/components/file-explorer/code-editor";
 import { useSession } from "@/lib/auth-client";
 import { useProject } from "@/providers/ProjectProvider";
-import { useGitHub } from "@/providers/GitHubProvider";
 import { toast } from "sonner";
 
 export default function EditorPage() {
   const { user } = useSession();
   const { selectedFile, currentProject, setShowCreateProject } = useProject();
-  const { selectedRepo, isGitHubMode } = useGitHub();
   const codeEditorRef = useRef<CodeEditorRef>(null);
   const [selectedGitHubFile, setSelectedGitHubFile] = useState<{
     path: string;
@@ -99,8 +97,6 @@ export default function EditorPage() {
                 ref={codeEditorRef}
                 selectedFile={selectedFile}
                 selectedGitHubFile={selectedGitHubFile}
-                isGitHubMode={isGitHubMode}
-                selectedRepo={selectedRepo}
                 onSave={handleSaveFile}
               />
             </div>
