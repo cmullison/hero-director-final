@@ -1,0 +1,133 @@
+/* Markdown Styling */
+.markdown-body {
+  @apply text-base leading-relaxed font-sans text-foreground;
+  @apply [&>*+*]:mt-4;
+}
+
+/* Headings */
+.markdown-body h1 {
+  @apply text-3xl font-semibold tracking-tight mt-8 mb-4 text-foreground/90;
+}
+
+.markdown-body h2 {
+  @apply text-2xl font-semibold tracking-tight mt-8 mb-3 text-foreground/90;
+}
+
+.markdown-body h3 {
+  @apply text-xl font-semibold tracking-tight mt-6 mb-3 text-foreground/90;
+}
+
+.markdown-body h4 {
+  @apply text-lg font-semibold tracking-tight mt-6 mb-3 text-foreground/90;
+}
+
+/* Paragraphs and Lists */
+.markdown-body p {
+  @apply text-base leading-7 text-foreground/80;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  @apply my-4 ml-6 space-y-2;
+}
+
+.markdown-body li {
+  @apply text-foreground/80 leading-7;
+}
+
+.markdown-body ul > li {
+  @apply list-disc;
+}
+
+.markdown-body ol > li {
+  @apply list-decimal;
+}
+
+/* Code Blocks */
+.markdown-body pre {
+  @apply p-4 my-4 rounded-lg bg-neutral-100 dark:bg-neutral-900 overflow-x-auto font-mono text-sm;
+}
+
+.markdown-body code {
+  @apply font-mono text-sm bg-neutral-100 dark:bg-neutral-900 px-1.5 py-0.5 rounded text-foreground/90;
+}
+
+.markdown-body pre code {
+  @apply p-0 bg-transparent;
+}
+
+/* Blockquotes */
+.markdown-body blockquote {
+  @apply pl-4 border-l-2 border-neutral-300 dark:border-neutral-700 italic text-foreground/70;
+}
+
+/* Links */
+.markdown-body a {
+  @apply text-primary hover:text-primary/90 underline-offset-4 hover:underline transition-colors;
+}
+
+/* Tables */
+.markdown-body table {
+  @apply w-full my-4 text-sm border-collapse;
+}
+
+.markdown-body th {
+  @apply bg-neutral-100 dark:bg-neutral-900 font-semibold text-left p-2 border border-neutral-200 dark:border-neutral-800;
+}
+
+.markdown-body td {
+  @apply p-2 border border-neutral-200 dark:border-neutral-800;
+}
+
+/* Images */
+.markdown-body img {
+  @apply max-w-full h-auto rounded-lg my-4;
+}
+
+/* Horizontal Rule */
+.markdown-body hr {
+  @apply my-8 border-neutral-200 dark:border-neutral-800;
+}
+
+/* Task Lists */
+.markdown-body input[type="checkbox"] {
+  @apply mr-2;
+}
+
+/* Code Syntax Highlighting */
+.markdown-body .hljs {
+  @apply bg-transparent;
+}
+
+.markdown-body .hljs-keyword {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+.markdown-body .hljs-string {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.markdown-body .hljs-comment {
+  @apply text-neutral-500 dark:text-neutral-400;
+}
+
+.markdown-body .hljs-function {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+/* Custom Scrollbar for Code Blocks */
+.markdown-body pre::-webkit-scrollbar {
+  @apply h-2 w-2;
+}
+
+.markdown-body pre::-webkit-scrollbar-track {
+  @apply bg-neutral-200 dark:bg-neutral-800 rounded-full;
+}
+
+.markdown-body pre::-webkit-scrollbar-thumb {
+  @apply bg-neutral-400 dark:bg-neutral-600 rounded-full;
+}
+
+.markdown-body pre::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-500 dark:bg-neutral-500;
+}

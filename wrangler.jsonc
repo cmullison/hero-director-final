@@ -1,0 +1,44 @@
+{
+  "$schema": "./config-schema.json",
+  "name": "hero-director-app",
+  "main": "src/server.ts",
+  "compatibility_date": "2025-07-01",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "nodejs_compat_populate_process_env",
+  ],
+  "observability": {
+    "enabled": true,
+  },
+  "assets": {
+    "directory": "dist",
+    "not_found_handling": "single-page-application",
+  },
+  "routes": [{ "pattern": "hd.mulls.io", "custom_domain": true }],
+  "r2_buckets": [
+    {
+      "binding": "IMAGE_BUCKET",
+      "bucket_name": "hero-director-files",
+      "preview_bucket_name": "preview-bucket",
+    },
+  ],
+  "vars": {
+    "AI_GATEWAY_ACCOUNT_ID": "1e9408c2be90eae9689a2b6942ca5d87",
+    "AI_GATEWAY_ID": "mulls-io",
+    "HOST": "https://hd.mulls.io",
+    "CLOUDFLARE_EMAIL": "hall.russets0w@icloud.com",
+    "CLOUDFLARE_ACCOUNT_ID": "1e9408c2be90eae9689a2b6942ca5d87",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hero-director-db",
+      "database_id": "2bc4630c-c93a-4d2c-be04-82878ffb02cf",
+    },
+  ],
+  "send_email": [
+    {
+      "name": "SEND_EMAIL",
+    },
+  ],
+}
